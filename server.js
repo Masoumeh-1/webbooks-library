@@ -10,7 +10,7 @@ const libraryRoutes = require('./libraryRoutes');  // import routes for borrow/r
 
 
 const app = express();
-const PORT = 3000;
+
 
 // Middleware to handle form data
 app.use(express.urlencoded({ extended: true }));
@@ -124,16 +124,22 @@ MongoClient.connect("mongodb+srv://masoumeh:HAmirSara3@cluster0.s2v1d.mongodb.ne
   .then(client => {
     db = client.db();
     app.locals.db = db;
-    console.log("✅ Connected to MongoDB");
+    console.log(" Connected to MongoDB");
     
-    app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`);
-    });
   })
   .catch(err => {
-    console.error("❌ MongoDB connection failed:", err);
+    console.error("MongoDB connection failed:", err);
   });
 
+  module.exports = app;
 
 
+
+// Only start the server if this file is run directly (not when imported by Vercel)
+if (require.main === module) {
+    const PORT = 3000;
+    app.listen(PORT, () => {
+        console.log(`Server running locally on http://localhost:${PORT}`);
+    });
+}
 
