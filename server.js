@@ -25,6 +25,7 @@ app.engine("hbs", exphbs.engine({
      partialsDir: path.join(__dirname, "views/partials") // <-- tell handlebars where partials are
      }));
 app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
 
 // Session setup
 app.use(session({
