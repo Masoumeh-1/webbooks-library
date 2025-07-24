@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Library</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="bgImage">
+    <h1 class="clsHeaderPartial">WebBooks Library</h1>
+    <hr>
+    {{#if loggedIn}}
+    <div class="top-right">
+        <a href="/logout">Sign Out</a>
+    </div>
+    {{/if}}
+
+    {{> heading}}   <!-- Import partial heading.hbs to display the heading -->
+
+    <div class="home-container">
+        <!-- Available Books -->
+        <form action="/borrow" method="POST" id="frmBorrow">
+            <article class="clsHomeLeftContainer">
+                <label class="clsLblHome">Available Books</label><br><br>
+                {{#each availableBooks}}
+                    <label class="clsBookLabel" for="chkBook{{@index}}" title="by {{author}}">
+                        <input type="checkbox" name="books" id="chkBook{{@index}}" value="{{ID}}">
+                        <span>{{Title}}</span>
+                    </label><br clear="all">
+                {{/each}}
+                <button id="btnBorrow" type="submit" disabled>Borrow</button>
+            </article>
+        </form>
+
+        <!-- Borrowed Books -->
+        <form action="/return" method="POST" id="frmReturn">
+            <article class="clsHomeRightContainer">
+                <label class="clsLblHome">{{user}}</label><br><br>
+                {{#each borrowedBooks}}
+                    <label class="clsBookLabel" for="chkBorrowed{{@index}}" title="by {{author}}">
+                        <input type="checkbox" name="books" id="chkBorrowed{{@index}}" value="{{ID}}">
+                        <span>{{Title}}</span>
+                    </label><br clear="all">
+                {{/each}}
+                <button id="btnReturn" type="submit" disabled>Return</button>
+            </article>
+        </form>
+    </div>
+
+    <script>
+        // Enable/disable Borrow button
+        const borrowForm = document.getElementById('frmBorrow');
+        const borrowBtn = document.getElementById('btnBorrow');
+        if (borrowForm) {
+            borrowForm.addEventListener('change', function() {
+                borrowBtn.disabled = !borrowForm.querySelector('input[type=checkbox]:checked');
+            });
+        }
+
+        // Enable/disable Return button
+        const returnForm = document.getElementById('frmReturn');
+        const returnBtn = document.getElementById('btnReturn');
+        if (returnForm) {
+            returnForm.addEventListener('change', function() {
+                returnBtn.disabled = !returnForm.querySelector('input[type=checkbox]:checked');
+            });
+        }
+    </script>
+</body>
+</html>

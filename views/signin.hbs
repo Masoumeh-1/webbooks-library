@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In - Library</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bgImage">
+    <h1 class="clsHeaderPartial">WebBooks Library</h1>
+    <hr>
+    {{#if loggedIn}}
+    <div class="top-right">
+        <a href="/">Sign Out</a>
+    </div>
+    {{/if}}
+    {{> heading}}  <!-- import the partial 'header.hbs' which displays the heading. -->
+
+    <div class="container">
+        <form action="/signin" method="POST" autocomplete="off">
+
+             <!-- Username input -->
+            <div class="form-group">
+                <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Username"
+                    autocomplete="new-username"
+                    required
+                >  <!-- The username input field -->
+            </div>
+
+            <!-- Password input -->
+            <div class="form-group">
+                <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    required
+                >   <!-- The password input field (hidden input) -->
+            </div>
+            <button type="submit">Submit</button>  <!-- Submit button for login -->
+            {{#if message}}
+                <p class="error">{{message}}</p>  <!-- Shows error message if invalid credentials -->
+            {{/if}}
+        </form>
+    </div>
+</body>
+</html>
