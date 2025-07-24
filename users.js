@@ -1,0 +1,10 @@
+// users.js
+
+module.exports = {
+    "george.tsang@senecacollege.ca": "web322n1a",
+    "john@beatles.uk": "lennonj!",
+    "paul@beatles.uk": "mccartney",
+    "george@beatles.uk": "harrison",
+    "ringo@beatles.uk": "starrr!!",
+    "mick@rollingstones.uk": "jaggerm!"
+};

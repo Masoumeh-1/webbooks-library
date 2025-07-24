@@ -62,7 +62,8 @@ app.get("/signin", (req, res) => {
 // Handle sign-in
 app.post("/signin", (req, res) => {
     const { username, password } = req.body;  // get form data from request
-    const users = JSON.parse(fs.readFileSync("users.json", "utf8")); // read users.json
+    const users = require("./users");
+
 
     if (!users[username]) {
         return res.render("signin", { message: "Not a registered username", loggedIn: false }); 
